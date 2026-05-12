@@ -15,6 +15,8 @@ const routes = require('./routes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.set('trust proxy', 1);
+
 // ─── SEGURIDAD ────────────────────────────────────────────────────────────────
 // Helmet: cabeceras HTTP de seguridad
 app.use(helmet({
