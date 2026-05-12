@@ -13,8 +13,8 @@ const seed = async () => {
     // Crear usuarios de prueba
     const hash = await bcrypt.hash('password123', 12);
     const [alumno1, alumno2] = await Usuario.bulkCreate([
-      { nombres: 'Juan Carlos', apellidos: 'García López', email: 'jgarcia@innovatec.edu.pe', password_hash: hash, codigo: '2021001' },
-      { nombres: 'María Elena', apellidos: 'Torres Silva', email: 'mtorres@innovatec.edu.pe', password_hash: hash, codigo: '2021002' },
+      { nombres: 'Angel Gabriel', apellidos: 'Valdivia Arias', email: 'angel.valdiviaa@innovatec.edu.pe', password_hash: hash, codigo: '23200224' },
+      { nombres: 'Malco Enrique', apellidos: 'Fernandez Diaz', email: 'malco.fernandez@innovatec.edu.pe', password_hash: hash, codigo: '23200173' },
     ]);
 
     // Crear cursos

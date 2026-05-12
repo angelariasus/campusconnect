@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CampusConnect</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-shapes" aria-hidden="true">
+    <span class="shape shape-a"></span>
+    <span class="shape shape-b"></span>
+    <span class="shape shape-c"></span>
+  </div>
+
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">CC</div>
+        <div>
+          <p class="brand-title">CampusConnect</p>
+          <p class="brand-subtitle">Panel del alumno</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button id="btn-open-settings" class="ghost">API</button>
+        <button id="btn-logout" class="ghost">Salir</button>
+      </div>
+    </header>
+
+    <section id="login-section" class="card login-card">
+      <div>
+        <p class="eyebrow">Bienvenido</p>
+        <h1>Accede a tu campus</h1>
+        <p class="muted">Ingresa con tu correo institucional y contrasena.</p>
+      </div>
+      <form id="login-form" class="form-grid">
+        <label>
+          <span>Correo</span>
+          <input id="login-email" type="email" placeholder="alumno@campus.edu" required />
+        </label>
+        <label>
+          <span>Contrasena</span>
+          <input id="login-password" type="password" placeholder="Minimo 6 caracteres" required minlength="6" />
+        </label>
+        <button class="primary" type="submit">Ingresar</button>
+        <p id="login-error" class="error"></p>
+      </form>
+    </section>
+
+    <section id="app-section" class="app hidden">
+      <div class="profile-banner">
+        <div>
+          <p class="eyebrow">Estado</p>
+          <h2 id="user-name">Alumno</h2>
+          <p id="user-meta" class="muted"></p>
+        </div>
+        <div class="profile-metrics">
+          <div class="metric">
+            <p class="metric-label">Cursos</p>
+            <p id="metric-cursos" class="metric-value">0</p>
+          </div>
+          <div class="metric">
+            <p class="metric-label">Tareas</p>
+            <p id="metric-tareas" class="metric-value">0</p>
+          </div>
+          <div class="metric">
+            <p class="metric-label">No leidas</p>
+            <p id="metric-notifs" class="metric-value">0</p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-tab="cursos">Cursos</button>
+        <button class="tab" data-tab="tareas">Tareas</button>
+        <button class="tab" data-tab="materiales">Materiales</button>
+        <button class="tab" data-tab="notas">Notas</button>
+        <button class="tab" data-tab="notificaciones">Notificaciones</button>
+        <button class="tab" data-tab="perfil">Perfil</button>
+      </nav>
+
+      <section id="tab-cursos" class="tab-panel">
+        <div class="panel-header">
+          <div>
+            <h3>Cursos matriculados</h3>
+            <p class="muted">Tu carga academica actual.</p>
+          </div>
+          <button id="btn-refresh-cursos" class="ghost">Actualizar</button>
+        </div>
+        <div id="cursos-list" class="grid"></div>
+      </section>
+
+      <section id="tab-tareas" class="tab-panel hidden">
+        <div class="panel-header">
+          <div>
+            <h3>Tareas pendientes</h3>
+            <p class="muted">Filtra por estado o curso.</p>
+          </div>
+          <div class="filters">
+            <select id="tareas-estado">
+              <option value="">Todas</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="entregado">Entregado</option>
+              <option value="revisado">Revisado</option>
+            </select>
+            <select id="tareas-curso"></select>
+          </div>
+        </div>
+        <div id="tareas-list" class="stack"></div>
+      </section>
+
+      <section id="tab-materiales" class="tab-panel hidden">
+        <div class="panel-header">
+          <div>
+            <h3>Materiales</h3>
+            <p class="muted">Archivos, enlaces y lecturas por curso.</p>
+          </div>
+          <div class="filters">
+            <select id="materiales-curso"></select>
+            <select id="materiales-tipo">
+              <option value="">Todos</option>
+              <option value="archivo">Archivo</option>
+              <option value="enlace">Enlace</option>
+              <option value="video">Video</option>
+              <option value="lectura">Lectura</option>
+            </select>
+          </div>
+        </div>
+        <div id="materiales-list" class="grid"></div>
+      </section>
+
+      <section id="tab-notas" class="tab-panel hidden">
+        <div class="panel-header">
+          <div>
+            <h3>Notas</h3>
+            <p class="muted">Promedios y evaluaciones por curso.</p>
+          </div>
+          <select id="notas-curso"></select>
+        </div>
+        <div id="notas-list" class="stack"></div>
+      </section>
+
+      <section id="tab-notificaciones" class="tab-panel hidden">
+        <div class="panel-header">
+          <div>
+            <h3>Notificaciones</h3>
+            <p class="muted">Avisos recientes del campus.</p>
+          </div>
+          <div class="filters">
+            <select id="notifs-leida">
+              <option value="">Todas</option>
+              <option value="false">No leidas</option>
+              <option value="true">Leidas</option>
+            </select>
+            <button id="btn-notifs-leer" class="ghost">Marcar todas</button>
+          </div>
+        </div>
+        <div id="notifs-list" class="stack"></div>
+      </section>
+
+      <section id="tab-perfil" class="tab-panel hidden">
+        <div class="panel-header">
+          <div>
+            <h3>Perfil</h3>
+            <p class="muted">Datos de tu cuenta.</p>
+          </div>
+        </div>
+        <div id="perfil-card" class="card"></div>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="settings-dialog" class="dialog">
+    <form method="dialog" class="dialog-card">
+      <h3>Configuracion API</h3>
+      <p class="muted">Define la URL base para consumir el backend.</p>
+      <label>
+        <span>API Base</span>
+        <input id="api-base-input" type="text" placeholder="http://localhost:3000/api" />
+      </label>
+      <div class="dialog-actions">
+        <button value="cancel" class="ghost">Cancelar</button>
+        <button id="btn-save-api" value="default" class="primary">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
